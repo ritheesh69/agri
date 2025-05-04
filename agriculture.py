@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import streamlit as st
+import pandas as pd
 import os
 import sqlite3
 from datetime import datetime, timedelta
@@ -10,6 +12,51 @@ import math
 import json
 import re
 from typing import Optional, Dict, List, Union
+
+# ======== ADD PWA CONFIG HERE ========
+st.markdown("""
+<link rel="manifest" href="/manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+""", unsafe_allow_html=True)
+# ======== END PWA CONFIG ========
+
+# ===== PWA CONFIGURATION =====
+st.markdown('''
+<link rel="manifest" href="/manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ... other meta tags ... -->
+''', unsafe_allow_html=True)
+
+# ===== SERVICE WORKER REGISTRATION =====
+st.markdown('''
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker registered'))
+      .catch(err => console.log('Registration failed: ', err));
+  });
+}
+</script>
+''', unsafe_allow_html=True)
+# ===== END PWA SETUP =====
+
+# THEN CONTINUE WITH YOUR NORMAL STREAMLIT CODE
+st.set_page_config(...)
+
+# Then continue with your existing code...
+st.set_page_config(
+    page_title="AgriculturalHub - Buy & Sell Agricultural Products",
+    page_icon="🌾",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+
 
 # Initialize session state and directories
 st.set_page_config(
