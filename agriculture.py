@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import streamlit as st
-import pandas as pd
 import os
 import sqlite3
 from datetime import datetime, timedelta
@@ -13,7 +11,15 @@ import json
 import re
 from typing import Optional, Dict, List, Union
 
-# ======== ADD PWA CONFIG HERE ========
+# ===== PAGE CONFIG - MUST BE FIRST STREAMLIT COMMAND =====
+st.set_page_config(
+    page_title="AgriculturalHub - Buy & Sell Agricultural Products",
+    page_icon="🌾",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# ===== PWA CONFIGURATION =====
 st.markdown("""
 <link rel="manifest" href="/manifest.json">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,18 +27,7 @@ st.markdown("""
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-""", unsafe_allow_html=True)
-# ======== END PWA CONFIG ========
 
-# ===== PWA CONFIGURATION =====
-st.markdown('''
-<link rel="manifest" href="/manifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- ... other meta tags ... -->
-''', unsafe_allow_html=True)
-
-# ===== SERVICE WORKER REGISTRATION =====
-st.markdown('''
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -42,31 +37,9 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-''', unsafe_allow_html=True)
-# ===== END PWA SETUP =====
+""", unsafe_allow_html=True)
 
-# THEN CONTINUE WITH YOUR NORMAL STREAMLIT CODE
-st.set_page_config(...)
-
-# Then continue with your existing code...
-st.set_page_config(
-    page_title="AgriculturalHub - Buy & Sell Agricultural Products",
-    page_icon="🌾",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-
-
-# Initialize session state and directories
-st.set_page_config(
-    page_title="AgriculturalHub - Buy & Sell Agricultural Products",
-    page_icon="🌾",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-# Initialize session state variables
+# ===== SESSION STATE INITIALIZATION =====
 if 'current_view' not in st.session_state:
     st.session_state.current_view = "main"
 if 'db_initialized' not in st.session_state:
@@ -76,7 +49,7 @@ if 'authenticated' not in st.session_state:
 if 'my_transport_listings' not in st.session_state:
     st.session_state.my_transport_listings = []
 
-# Create necessary directories
+# ===== DIRECTORY SETUP =====
 os.makedirs('data', exist_ok=True)
 os.makedirs('images/uploads', exist_ok=True)
 
