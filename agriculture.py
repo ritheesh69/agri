@@ -890,4 +890,4 @@ def show_find_transport():
             st.markdown(f"**Sample cost for {sample_distance}km:** ₹{sample_cost:.2f}")
             
             if st.button(f"Request Booking - {listing['id']}", key=f"req_booking_{listing['id']}"):
-                st.success(f"Your booking request has been sent to {listing['provider_name']}.
+    st.success(f"Your booking request has been sent to {listing['provider_name']}. They will contact you soon.")
